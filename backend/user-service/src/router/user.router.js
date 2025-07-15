@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getAllUsers } from "../handler/user.handler.js";
+import { getAllUsers, createUser } from "../handler/user.handler.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', getAllUsers)
-// router.post('/users')
+router.get("/", getAllUsers);
+router.post("/create-user", createUser);
 
-export default router
+export default router;
