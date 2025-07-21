@@ -19,3 +19,17 @@ export const createUser = async (req, res) => {
     res.status(500).json({ error: "failed creating user" });
   } 
 };
+
+export const findUserByEmail = async (req, res) => {
+  const {email} = req.body;
+  try {
+    const user = await userService.findUserByEmail(email)
+    if (user == null){
+      res.status(400).json({ message: 'User not found', data: null});
+    }
+    return res.status(200).json({data: user}) 
+  } catch (error) {
+    console.log("failed finding user: ", error);
+    res.status(500).json({ error: "failed finding user" });
+  }
+}

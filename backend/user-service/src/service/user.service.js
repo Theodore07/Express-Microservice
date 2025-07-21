@@ -25,6 +25,11 @@ export const createUser = async ({userName, email, password, role}) => {
     return user;
 }
 
+export const findUserByEmail = async (email) => {
+    const user = await userRepository.getUserByEmail(email)
+    return user.toJSON()
+}
+
 // export const updateUser = async () => {
 
 // }

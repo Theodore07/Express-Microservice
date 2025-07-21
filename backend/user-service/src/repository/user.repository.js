@@ -21,6 +21,10 @@ class UserRepository {
     async getAllUsers(){
         return await User.findAll();
     }
+
+    async getUserByEmail(email){
+        return await User.findOne({where: {email: email}})
+    }
 }
 
 export default new UserRepository();

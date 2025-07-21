@@ -1,18 +1,20 @@
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import dotenv from "dotenv";
+import { authMiddleware } from "./middleware/auth.middleware";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.GATEWAY_PORT || 3000;
 const USER_SERVICE = process.env.USER_SERVICE_URL || "http://localhost:3001";
-const MONITORING_SERVICE = process.env.MONITORING_SERVICE_URL || "http://localhost:3002";
+const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3002";
 
 app.use(express.json());
 
 app.use(
   "/api/user",
+  authMiddleware,
   createProxyMiddleware({
     target: USER_SERVICE,
     changeOrigin: true,
@@ -29,9 +31,9 @@ app.use(
   })
 );
 app.use(
-  "/api/monitoring",
+  "/api/auth",
   createProxyMiddleware({
-    target: MONITORING_SERVICE,
+    target: AUTH_SERVICE_URL,
     changeOrigin: true,
   })
 );
