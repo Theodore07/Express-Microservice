@@ -1,7 +1,7 @@
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import dotenv from "dotenv";
-import { authMiddleware } from "./middleware/auth.middleware";
+import { authMiddleware } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 
@@ -35,6 +35,16 @@ app.use(
   createProxyMiddleware({
     target: AUTH_SERVICE_URL,
     changeOrigin: true,
+    on: {
+      proxyReq: (proxyReq, req, res) => {
+        if (req.body && Object.keys(req.body).length > 0) {
+          const bodyData = JSON.stringify(req.body);
+          proxyReq.setHeader("Content-Type", "application/json");
+          proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+          proxyReq.write(bodyData);
+        }
+      },
+    },
   })
 );
 

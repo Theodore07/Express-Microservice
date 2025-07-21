@@ -18,4 +18,5 @@ export const authMiddleware = (req, res, next) => {
         console.log('error: failed validating user', error)
         return res.status(403).json({ error: 'Invalid token' });
     }
+
 }

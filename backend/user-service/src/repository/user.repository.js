@@ -19,11 +19,17 @@ class UserRepository {
     }
 
     async getAllUsers(){
-        return await User.findAll();
+        return await User.findAll(
+            {
+                attributes: ['id', 'userName', 'email', 'role']
+            }
+        );
     }
 
     async getUserByEmail(email){
-        return await User.findOne({where: {email: email}})
+        return await User.findOne({ where: {
+            email: email
+        }})
     }
 }
 

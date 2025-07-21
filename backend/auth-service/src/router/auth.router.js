@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginHandler } from "../handler/auth.handler";
+import { loginHandler } from "../handler/auth.handler.js";
 
 const router = Router()
 

@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { getAllUsers, createUser,} from "../handler/user.handler.js";
-import { findUserByEmail } from "../service/user.service.js";
+import { getAllUsers, createUser, findUserByEmail} from "../handler/user.handler.js";
 
 const router = Router();
 

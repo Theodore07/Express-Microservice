@@ -1,7 +1,7 @@
 import { login } from "../service/auth.service.js";
 
 export const loginHandler = async (req, res) => {
-  const { email, password } = req.body();
+  const { email, password } = req.body;
   try {
     const token = await login(email, password);
     if (token == null) {
