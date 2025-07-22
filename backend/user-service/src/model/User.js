@@ -32,6 +32,14 @@ const User = sequelize.define("User", {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true
+  },
+  lastCheckIn: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  lastCheckOut: {
+    type: DataTypes.DATE,
+    allowNull: false
   }
 }, {
     tableName: 'users',

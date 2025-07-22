@@ -30,6 +30,28 @@ export const findUserByEmail = async (email) => {
     return user.toJSON()
 }
 
+export const checkIn = async (userId, timestamps) => {
+    const user = await userRepository.getUserById(userId)
+    if (user.isCheckedIn){
+        return null
+    }
+    const response =  await userRepository.checkIn(userId, timestamps)
+    console.log(response)
+    return response
+}
+
+export const checkOut = async (userId, timestamps) => {
+    const user = await userRepository.getUserById(userId)
+    if (!user.isCheckedIn){
+        return null
+    }
+    const response =  await userRepository.checkOut(userId, timestamps)
+    console.log(response)
+    return response
+
+}
+
+
 // export const updateUser = async () => {
 
 // }

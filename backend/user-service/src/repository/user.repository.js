@@ -1,3 +1,4 @@
+import { where } from 'sequelize'
 import User from '../model/User.js'
 
 class UserRepository {
@@ -14,6 +15,14 @@ class UserRepository {
         return await User.update(data, {where: {id: id}})
     }
 
+    async checkIn(id, timestamps){
+        await User.update({isCheckedIn: true, lastCheckIn: timestamps}, {where: {id: id}})
+    }
+
+    async checkOut(id, timestamps){
+        await User.update({isCheckedIn: false, lastCheckOut: timestamps}, {where: {id: id}})
+    }
+    
     async deleteUser(userId) {
         await User.update({isActive:false }, {where: {id: userId}})
     }
@@ -21,7 +30,7 @@ class UserRepository {
     async getAllUsers(){
         return await User.findAll(
             {
-                attributes: ['id', 'userName', 'email', 'role']
+                attributes: ['id', 'userName', 'email', 'role', 'lastCheckIn', 'lastCheckOut']
             }
         );
     }

@@ -35,3 +35,32 @@ export const findUserByEmail = async (req, res) => {
     res.status(500).json({ error: "failed finding user" });
   }
 };
+
+export const checkInUser = async (req, res) => {
+  const {id, timestamp} = req.body
+  try {
+    const response = await userService.checkIn(id, timestamp)
+    if(response == null){
+      res.status(200).json({message: "user checked in already"})
+    }
+    
+    res.status(200).json({message: "user checked in successfully"})
+  } catch (error) {
+     console.log("failed checking in user: ", error);
+    res.status(500).json({ error: "failed check in" });
+  }
+};
+
+export const checkOutUser = async (req, res) => {
+  const {id, timestamp} = req.body
+  try {
+    const response = await userService.checkOut(id, timestamp)
+    if(response == null){
+      res.status(200).json({message: "user checked out already"})
+    }
+    res.status(200).json({message: "user checked out successfully"})
+  } catch (error) {
+     console.log("failed checking out user: ", error);
+    res.status(500).json({ error: "failed check out" });
+  }
+};
