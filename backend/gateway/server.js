@@ -20,11 +20,11 @@ app.use(
     changeOrigin: true,
     on: {
       proxyReq: (proxyReq, req, res) => {
+        proxyReq.setHeader("X-user", JSON.stringify(req.user))
         if (req.body && Object.keys(req.body).length > 0) {
           const bodyData = JSON.stringify(req.body);
           proxyReq.setHeader("Content-Type", "application/json");
           proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
-          proxyReq.setHeader("X-user", JSON.stringify(req.user))
           proxyReq.write(bodyData);
         }
       },

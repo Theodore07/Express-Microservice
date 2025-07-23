@@ -13,6 +13,7 @@ export const authMiddleware = (req, res, next) => {
     try {
         const user = jwt.verify(token, process.env.JWT_SECRET)
         req.user = user
+        console.log(user)
         next();
     } catch (error) {
         console.log('error: failed validating user', error)

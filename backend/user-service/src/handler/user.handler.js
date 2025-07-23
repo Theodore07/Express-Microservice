@@ -39,11 +39,7 @@ export const findUserByEmail = async (req, res) => {
 export const checkInUser = async (req, res) => {
   const {id, timestamp} = req.body
   try {
-    const response = await userService.checkIn(id, timestamp)
-    if(response == null){
-      res.status(200).json({message: "user checked in already"})
-    }
-    
+    await userService.checkIn(id, timestamp)
     res.status(200).json({message: "user checked in successfully"})
   } catch (error) {
      console.log("failed checking in user: ", error);
@@ -54,10 +50,7 @@ export const checkInUser = async (req, res) => {
 export const checkOutUser = async (req, res) => {
   const {id, timestamp} = req.body
   try {
-    const response = await userService.checkOut(id, timestamp)
-    if(response == null){
-      res.status(200).json({message: "user checked out already"})
-    }
+    await userService.checkOut(id, timestamp)
     res.status(200).json({message: "user checked out successfully"})
   } catch (error) {
      console.log("failed checking out user: ", error);
@@ -66,6 +59,7 @@ export const checkOutUser = async (req, res) => {
 };
 
 export const authenticateUser = async (req, res) => {
+  console.log(req.headers)
   const userInfo = req.headers['x-user']
   const parsedHeader = JSON.parse(userInfo)
 
