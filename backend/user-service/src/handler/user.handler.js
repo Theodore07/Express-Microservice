@@ -64,3 +64,11 @@ export const checkOutUser = async (req, res) => {
     res.status(500).json({ error: "failed check out" });
   }
 };
+
+export const authenticateUser = async (req, res) => {
+  const userInfo = req.headers['x-user']
+  const parsedHeader = JSON.parse(userInfo)
+
+  const user = await userService.authenticateUser(parsedHeader.id)
+  res.status(200).json({ message: "user info", data: user})
+}

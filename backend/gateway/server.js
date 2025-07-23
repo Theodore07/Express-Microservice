@@ -24,6 +24,7 @@ app.use(
           const bodyData = JSON.stringify(req.body);
           proxyReq.setHeader("Content-Type", "application/json");
           proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+          proxyReq.setHeader("X-user", JSON.stringify(req.user))
           proxyReq.write(bodyData);
         }
       },

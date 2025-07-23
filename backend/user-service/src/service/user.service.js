@@ -18,7 +18,7 @@ export const createUser = async ({userName, email, password, role}) => {
         password: hashedPass,
         role: role ?? 'employee',
         isActive: true,
-        isCheckedIn: false,
+        isCheckedIn: false, 
     }
     //blom check duplicate email
     const user = await userRepository.createUser(userData)
@@ -49,6 +49,11 @@ export const checkOut = async (userId, timestamps) => {
     console.log(response)
     return response
 
+}
+
+export const authenticateUser = async (userId) => {
+    const user = await userRepository.getUserById(userId)
+    return user
 }
 
 

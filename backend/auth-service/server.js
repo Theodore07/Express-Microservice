@@ -8,13 +8,4 @@ app.listen(PORT, () => {
    console.log(`Auth service running on port ${PORT}`);
 })
 
-// ((async () => {
-//       try {
-//         app.listen(PORT, () => {
-//           console.log(`User service running on port ${PORT}`);
-//         });
-//       } catch (error) {
-//         console.log('Failed running auth-service:', error)
-//       }
-//     })
-//   );
+

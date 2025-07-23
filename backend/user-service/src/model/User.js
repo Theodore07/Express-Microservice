@@ -35,11 +35,11 @@ const User = sequelize.define("User", {
   },
   lastCheckIn: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
   lastCheckOut: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   }
 }, {
     tableName: 'users',

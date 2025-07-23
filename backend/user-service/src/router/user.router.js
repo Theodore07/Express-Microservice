@@ -5,6 +5,7 @@ import {
   findUserByEmail,
   checkInUser,
   checkOutUser,
+  authenticateUser,
 } from "../handler/user.handler.js";
 
 const router = Router();
@@ -14,5 +15,6 @@ router.post("/create-user", createUser);
 router.post("/verify", findUserByEmail);
 router.post("/checkin", checkInUser);
 router.post("/checkout", checkOutUser);
+router.get("/me", authenticateUser);
 
 export default router;
